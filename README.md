@@ -23,17 +23,18 @@ The goal is to replicate real-world backend data engineering workflows.
 ---
 
 ## 📂 Project Structure
-
+```
+Publishing Analytics Pipeline
 ├── data/
-│ ├── raw/ # raw input data (CSV files)
-│ ├── processed/ # cleaned/transformed data
-├── pipeline/ # ingestion, cleaning, validation logic
-├── api/ # FastAPI application
-├── db/ # database models and connection
-├── tests/ # test suite
+│   ├── raw/          # raw input data (CSV files)
+│   ├── processed/    # cleaned/transformed data
+├── pipeline/         # ingestion, cleaning, validation logic
+├── api/              # FastAPI application
+├── db/               # database models and connection
+├── tests/            # test suite
 ├── requirements.txt
 └── README.md
-
+```
 
 ## Setup Instructions
 
