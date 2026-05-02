@@ -24,7 +24,7 @@ The goal is to replicate real-world backend data engineering workflows.
 
 ## 📂 Project Structure
 ```
-Publishing Analytics Pipeline
+publishing-analytics-pipeline/
 ├── data/
 │   ├── raw/          # raw input data (CSV files)
 │   ├── processed/    # cleaned/transformed data
