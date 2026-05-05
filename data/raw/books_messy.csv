@@ -1,6 +1,6 @@
 id,title,author,sales
 1,Book A,Author A,100
 2,Book B,,200
-3,Book C,Author C,abc
+3, book c,Author C,abc
 4,,Author D,300
 5,Book E,Author E,

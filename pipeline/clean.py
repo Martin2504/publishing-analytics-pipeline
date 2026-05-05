@@ -28,6 +28,10 @@ def clean_data(df):
     # Fill missing sales with 0
     df['sales'] = df['sales'].fillna(0)
 
+    # Standardise text fields
+    df["title"] = df["title"].str.strip().str.title()
+    df["author"] = df["author"].str.strip().str.title()
+
     print(f"[INFO] Rows after cleaning: {len(df)}")
 
     return df
