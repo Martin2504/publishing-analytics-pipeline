@@ -31,12 +31,32 @@ def validate_schema(df):
 def validate_business_rules(df):
     print("[INFO] Validating business rules...")
 
-    # 1. Check sales are numeric
+    # 1. Check id is numeric
+    if not pd.api.types.is_numeric_dtype(df['id']):
+        print("[ERROR] ID column is not numeric")
+        return None
+    
+    # 2. Check for missing ID's
+    if df['id'].isna().any():
+        print("[ERROR] Missing ID values found")
+        return None
+    
+    # 3. Check for empty titles
+    if df['title'].str.strip().eq('').any():
+        print("[ERROR] Empty title values found")
+        return None
+    
+    # 4. Check for empty authors
+    if df['author'].str.strip().eq('').any():
+        print("[ERROR] Empty author values found")
+        return None
+    
+    # 5. Check sales are numeric
     if not pd.api.types.is_numeric_dtype(df['sales']):
         print("[ERROR] Sales column is not numeric")
         return None
 
-    # 2. Check for negative sales
+    # 6. Check for negative sales
     if (df['sales'] < 0).any():
         print("[ERROR] Negative sales values found")
         return None

@@ -22,3 +22,6 @@ if __name__ == "__main__":
             if df is not None:
                 print("\n[INFO] Final Valid Data:")
                 print(df.head())
+
+                df.to_csv("data/processed/books_cleaned.csv", index=False)
+                print("\n[INFO] Cleaned data saved to data/processed/books_cleaned.csv")
