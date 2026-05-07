@@ -1,6 +1,7 @@
 from pipeline.ingest import load_data
 from pipeline.clean import clean_data
 from pipeline.validate import validate_schema, validate_business_rules
+from db.insert import insert_books
 
 if __name__ == "__main__":
 
@@ -16,7 +17,7 @@ if __name__ == "__main__":
             # 2. Clean data
             df = clean_data(df)
 
-            #3. Validate business rules
+            # 3. Validate business rules
             df = validate_business_rules(df)
 
             if df is not None:
@@ -25,3 +26,7 @@ if __name__ == "__main__":
 
                 df.to_csv("data/processed/books_cleaned.csv", index=False)
                 print("\n[INFO] Cleaned data saved to data/processed/books_cleaned.csv")
+
+                # Insert books into the database
+                insert_books(df)
+                print("[INFO] Pipeline completed successfully")
