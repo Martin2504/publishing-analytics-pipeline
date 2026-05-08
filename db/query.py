@@ -1,6 +1,13 @@
 from db.database import SessionLocal
 from db.models import Book
 
+"""
+Database Query Module
+
+Provides functionality to retrieve and display data from the database.
+Used for testing and verifying that data has been correctly stored.
+"""
+
 def get_books():
     session = SessionLocal()
 
