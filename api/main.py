@@ -1,7 +1,9 @@
-from fastapi import FastAPI
+from fastapi import FastAPI, HTTPException
+from typing import List
+
 from db.database import SessionLocal
 from db.models import Book
-
+from api.schemas import BookResponse
 """
 API Module
 
@@ -16,39 +18,30 @@ app = FastAPI()
 def root():
     return {"message": "Publishing Analytics API is running"}
 
-@app.get("/books")
+@app.get("/books", response_model=List[BookResponse])
 def get_books():
     session = SessionLocal()
 
-    books = session.query(Book).all()
+    try:
+        books = session.query(Book).all()
+        return books
+    
+    finally:
+        session.close()
 
-    result = []
-    for book in books:
-        result.append({
-            "id": book.id,
-            "title": book.title,
-            "author": book.author,
-            "sales": book.sales
-        })
 
-    session.close()
-
-    return result
-
-@app.get("/books/{book_id}")
+@app.get("/books/{book_id}", response_model=BookResponse)
 def get_book(book_id: int):
     session = SessionLocal()
 
-    book = session.query(Book).filter(Book.id == book_id).first()
+    try:
+        book = session.query(Book).filter(Book.id == book_id).first()
 
-    session.close()
+        if not book:
+            raise HTTPException(status_code=404, detail="Book not found")
+        
+        return book
+    
+    finally:
+        session.close()
 
-    if not book:
-        return {"error": "Book not found"}
-
-    return {
-        "id": book.id,
-        "title": book.title,
-        "author": book.author,
-        "sales": book.sales
-    }
