@@ -34,7 +34,6 @@ def root():
 def get_books(db: Session = Depends(get_db)):
     return db.query(Book).all()
 
-
 @app.get("/books/{book_id}", response_model=BookResponse)
 def get_book(book_id: int, db: Session = Depends(get_db)):
     book = db.query(Book).filter(Book.id == book_id).first()
@@ -72,4 +71,8 @@ def ingest_data():
         "rows_processed": len(df)
     }
 
+@app.get("/analytics/top-selling", response_model=List[BookResponse])
+def get_top_selling_books(db: Session = Depends(get_db)):
+    top_books = db.query(Book).order_by(Book.sales.desc()).all()
+    return top_books
 
